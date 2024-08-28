@@ -9,7 +9,7 @@ public class Question {
     private String opt4;
     private String answer;
 
-
+//Constructor
     public Question(int id, String question, String opt1, String opt2, String opt3, String opt4, String answer) {
         this.id = id;
         this.question = question;
@@ -63,5 +63,7 @@ public class Question {
         this.answer = answer;
     }
     
-
+    public String toString(){   //to directly return the details by just passing the object
+        return "Question [id = "+id+ ", Question = "+question+ ", opt1 = "+opt1+", opt2 = "+opt2+", opt3 = "+opt3+", opt4 = "+opt4+ ", answer = "+answer+" ]";
+    }
 }
