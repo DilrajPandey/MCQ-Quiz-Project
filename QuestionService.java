@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class QuestionService {
     Question[] questions = new Question[5];
+    String[] selection = new String[5];
 
     public QuestionService(){
         questions[0] = new Question(1,"what is yr name?","Rahul","Anshul","Ayush","Gaurav","Rahul");  
@@ -13,10 +14,10 @@ public class QuestionService {
         //create object of each questions otherwise it will give NullPointerException(for every question = that's why in the constructor)
     }
 
-//WAY ONE OF CALCULATING QUIZ SCORE
+//WAY TWO OF CALCULATING QUIZ SCORE
     public void PlayQuiz(){
 
-        int Score = 0;     //to count the score
+        int i = 0;    //for iteration
         for(Question q : questions){  //for each questions
             System.out.println("Question no. : "+ q.getId()+" ");
             System.out.println(q.getQuestion());
@@ -25,19 +26,29 @@ public class QuestionService {
             System.out.println(q.getOpt3());
             System.out.println(q.getOpt4());
 
+            System.out.print("Your Ans : ");  
             Scanner sc = new Scanner(System.in);
-            String ans = sc.nextLine();    //taking ans input   
-            //We can store all the answers in an array if we want to use answers outside this function
+            selection[i] = sc.nextLine();    //storing the ans in selection[]
+            i++;
+            //We have stored all the answers in an array as we want to use answers outside this function
             // String[] selections = new String[5];
-            //like creating another function which calculates the score 
+            //like creating another function which calculates the score (PrintScore)
+            System.out.println();
+            
+        }
+        
+    }
+    public void PrintScore(){
+        int Score = 0;
+        for(int i=0;i<questions.length;i++){
+            Question que = questions[i];   //taken the Question type data type to store the question[i] so that we can get the actual answer from it (as question[i] contains all details)
 
-            if(ans.equals(q.getAnswer())){    //checking if the answer is equals to the actual ans or not
+            String ActualAnswer = que.getAnswer();  //actual ans from questions[i]
+            String SelectedAnswer = selection[i];   //selected ans 
+
+            if(SelectedAnswer.equals(ActualAnswer)){ //checking if the answer is equals to the actual ans or not
                 Score++;                      //incrementing the score
-                System.out.println("CORRECT");
-            } else{
-                System.out.println("INCORRECT");
             }
-            System.out.println();             //for spacing
         }
         System.out.println("Your total score is : "+Score);  //printing the total score
     }
